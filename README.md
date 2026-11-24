@@ -16,15 +16,12 @@
 
 ## What it does
 
-Rayward collects results from several Roblox and Discord safety sources: Rotector, TASE, RAB, Okappiki, ServerSweep, RCR and RoLock. This plugin looks people up there and shows the answer where you're already looking.
+Rayward collects results from several Roblox and Discord safety sources: Rotector, TASE, RAB, Okappiki, ServerSweep, RCR and etc. This plugin looks people up there and shows the answer where you're already looking.
 
-- A Rayward section in profiles and the DM sidebar, with an overview, one card per source and the Roblox accounts Rotector links to the person.
-- Each source's status, reasons, evidence and appeal link, exactly as the source reports them.
-- A confirmation before your first message, sticker or wave to a flagged user.
-- Optional markers next to flagged users in the member list and chat, plus a warning under their first message.
-- `/rayward`, `/rayward-roblox` and `/rayward-group` commands that reply with a report only you can see.
-
-If one source is down, the others still show. The report names the source that didn't answer and lets you retry just that one.
+- A Rayward section in profiles and the DM sidebar, with an overview and report.
+- Each source's status, reasons, evidence and links.
+- Markers next to flagged users in the member list and chat, plus a warning under their message.
+- `/rayward`, `/rayward-roblox` and `/rayward-group` slash commands (Only visible to you)
 
 <p>
   <img src="https://skillicons.dev/icons?i=ts,react,css,nodejs,pnpm,githubactions,discord" alt="TypeScript, React, CSS, Node.js, pnpm, GitHub Actions, Discord">
@@ -43,9 +40,9 @@ pnpm build
 pnpm inject
 ```
 
-`pnpm inject` patches the Discord desktop app. For the browser extension, run `pnpm buildWeb` instead and load `dist/chromium-unpacked`. Vesktop users can point Vesktop's Vencord location setting at the `dist` folder.
+`pnpm inject` patches the Discord desktop app. For the browser extension, run `pnpm buildWeb` instead and load `dist/chromium-unpacked`. Vesktop users can point **Settings > Vencord location** at the `dist` folder.
 
-You can also download `rayward-vX.Y.Z.zip` from the [latest release](https://github.com/theseven1/Rayward-Vencord-User-Plugin/releases/latest), unzip it into `src/userplugins/` and build the same way. Every release zip has a SHA-256 checksum and a build provenance attestation.
+You can also download `rayward-vX.Y.Z.zip` from the [latest release](https://github.com/theseven1/Rayward-Vencord-User-Plugin/releases/latest), unzip it into `src/userplugins/` and build the same way.
 
 Once Discord restarts, open **Settings > Vencord > Plugins**, enable **Rayward** and paste your Rayward API key. You can apply for one at [rayward.app](https://rayward.app/signin).
 
@@ -53,11 +50,11 @@ Once Discord restarts, open **Settings > Vencord > Plugins**, enable **Rayward**
 
 ## Configuration
 
-Profiles are checked when you open them. Member list and chat markers check everyone you can see, so they start turned off. Sources can be switched on or off individually, and results are cached for up to seven days. Every setting is listed in [docs/configuration.md](docs/configuration.md).
+Profiles are checked when you open them. Member list and chat markers check everyone you can see. Sources can be switched on or off individually. Every setting is listed in [docs/configuration.md](docs/configuration.md).
 
 ## Privacy
 
-Looking someone up sends their Discord ID, and the IDs of Roblox accounts linked to them, to Rayward with your API key. Roblox avatars and names come from Roblox's public API. The plugin has no server of its own, and [docs/privacy.md](docs/privacy.md) lists every host it contacts and when.
+Looking someone up sends their Discord ID, and the IDs of Roblox accounts linked to them, to Rayward with your API key. Roblox avatars and names come from Roblox's public API. Nothing is sent to the plugin's author. [docs/privacy.md](docs/privacy.md) lists every host the plugin contacts and when.
 
 ## Contributing
 

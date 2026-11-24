@@ -9,7 +9,7 @@ The plugin runs entirely in your Discord client and has no server of its own. Th
 | `roscoe.rayward.app` | Discord user IDs and linked Roblox IDs, with your API key | Whenever someone is looked up (see below) |
 | `roscoe.rayward.app` | Nothing identifying | Loading the source list and source logos |
 | `users.roblox.com`, `thumbnails.roblox.com`, `tr.rbxcdn.com` | Roblox IDs | Full reports and `/rayward-roblox`, when "Display linked Roblox accounts" is on |
-| `catchthem.mk-7.org` | Linked Roblox IDs, with your EASI secret | Full reports, only when EASI is on and a secret is set |
+| `catchthem.mk-7.org` | Linked Roblox IDs, with your CatchThem secret | Full reports, only when EASI is on and a secret is set |
 | `rayward.app` | Nothing identifying | The icon in command replies |
 
 ## When someone is looked up

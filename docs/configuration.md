@@ -10,7 +10,7 @@ Settings live under **Settings > Vencord > Plugins > Rayward**. Changes apply ri
 | Sources | Rayward's defaults | One switch per source Rayward offers. Sources added later follow Rayward's default until you change them. |
 | Display linked Roblox accounts | on | Loads avatars and names for linked Roblox accounts in full reports. |
 | Check linked Roblox accounts with EASI | off | Adds EASI results for linked Roblox accounts. Needs an EASI secret. |
-| EASI secret | empty | Sent only to the EASI service. |
+| EASI secret | empty | Sent only to the EASI proxy service. |
 
 ## Profiles
 
@@ -57,7 +57,7 @@ Every result is shown in reports, but only results a source marks as actionable 
 
 ## Cache
 
-The slider sets how long results are kept, from 5 minutes to 7 days (default 24 hours). Failed lookups are never cached. A failing source is retried after 30 seconds, then 2 minutes, then 10 minutes, or right away when you press retry. **Clear cached results** in settings, or **Rayward: Clear cache** in the toolbox, empties everything.
+The slider sets how long results are kept. (default 24 hours). Failed lookups are never cached. A failing source is retried after 30 seconds, then 2 minutes, then 10 minutes, or right away when you press retry. **Clear cached results** in settings, or **Rayward: Clear cache** in the toolbox, empties everything.
 
 ## Commands and shortcuts
 
