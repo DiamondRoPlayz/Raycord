@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Appeal a flag
+    url: https://rayward.app
+    about: Flags come from the sources on Rayward. Appeal through the source, using the Appeal link on its card in the report.
+  - name: Questions and help
+    url: https://github.com/theseven1/Rayward-Vencord-User-Plugin/discussions
+    about: Setup questions, ideas you want to talk through, anything that isn't a bug.
+  - name: Report a security vulnerability
+    url: https://github.com/theseven1/Rayward-Vencord-User-Plugin/security/advisories/new
+    about: Please report security problems privately, not as a public issue.
+  - name: Vencord itself
+    url: https://vencord.dev/discord
+    about: Problems with Vencord that also happen with this plugin disabled.

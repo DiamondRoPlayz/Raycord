@@ -1,0 +1,78 @@
+name: Bug report
+description: The plugin crashes, shows the wrong thing, or doesn't do what the docs say.
+title: "bug: "
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. If a source's result for someone looks wrong, use the "A source result looks wrong" form instead.
+
+        Never paste your Rayward API key or EASI secret. Check screenshots and logs for them before posting.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a profile with ...
+        2. Click ...
+        3. ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: client
+    attributes:
+      label: Client
+      options:
+        - Discord desktop (Stable)
+        - Discord desktop (PTB)
+        - Discord desktop (Canary)
+        - Vesktop
+        - Browser extension
+        - Userscript
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      description: The release you installed, or the commit if you built from main.
+      placeholder: v1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: vencord-version
+    attributes:
+      label: Vencord version
+      description: Settings > Vencord shows the commit hash at the bottom.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console output
+      description: Open DevTools with Ctrl+Shift+I, go to Console and filter by "Rayward". Paste anything relevant.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and this hasn't been reported.
+          required: true
+        - label: I'm on the latest release, or I built from the latest main.
+          required: true
+        - label: My API key and EASI secret don't appear anywhere in this report.
+          required: true

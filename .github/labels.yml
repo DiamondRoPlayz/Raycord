@@ -1,0 +1,66 @@
+- name: bug
+  color: d73a4a
+  description: Something isn't working
+- name: enhancement
+  color: a2eeef
+  description: New feature or improvement
+- name: documentation
+  color: 0075ca
+  description: Docs only
+- name: question
+  color: d876e3
+  description: Needs an answer rather than a change
+- name: needs-triage
+  color: fbca04
+  description: Not looked at yet
+- name: confirmed
+  color: 0e8a16
+  description: Reproduced by a maintainer
+- name: source data
+  color: c5def5
+  description: The plugin shows a source result differently from the source
+- name: vencord-compat
+  color: e99695
+  description: Breakage caused by a Vencord or Discord change
+- name: security
+  color: b60205
+  description: Security related
+- name: dependencies
+  color: 0366d6
+  description: Dependency or action updates
+- name: good first issue
+  color: 7057ff
+  description: Small, well defined, good for new contributors
+- name: help wanted
+  color: 008672
+  description: Open for anyone to pick up
+- name: duplicate
+  color: cfd3d7
+  description: Already reported
+- name: invalid
+  color: e4e669
+  description: Not a problem with this plugin
+- name: wontfix
+  color: ffffff
+  description: Won't be changed
+- name: pinned
+  color: 5319e7
+  description: Never marked stale
+- name: stale
+  color: ededed
+  description: No recent activity
+- name: "area: data"
+  color: 1d76db
+  description: Lookups, caching, verdicts
+- name: "area: ui"
+  color: 1d76db
+  description: Profile section, report, indicators, settings
+- name: "area: ci"
+  color: 1d76db
+  description: Workflows and repository automation
+- name: "area: docs"
+  color: 1d76db
+  description: README and docs/
+- name: "area: tests"
+  color: 1d76db
+  description: tests/

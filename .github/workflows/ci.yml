@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      vencord-ref:
+        description: Vencord branch, tag or commit to build against
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out plugin
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: plugin
+          persist-credentials: false
+
+      - name: Check out Vencord
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Vendicated/Vencord
+          ref: ${{ inputs.vencord-ref || 'main' }}
+          path: vencord
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          package_json_file: vencord/package.json
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: vencord/pnpm-lock.yaml
+
+      - name: Install Vencord dependencies
+        working-directory: vencord
+        run: pnpm install --frozen-lockfile
+
+      - name: Add plugin to Vencord
+        run: |
+          mkdir -p vencord/src/userplugins/rayward
+          rsync -a --exclude .git --exclude .github --exclude docs plugin/ vencord/src/userplugins/rayward/
+
+      - name: Lint
+        working-directory: vencord
+        run: node ../plugin/.github/scripts/lint.mjs ../plugin
+
+      - name: Type check
+        working-directory: vencord
+        run: pnpm exec tsc --noEmit
+
+      - name: Build desktop
+        working-directory: vencord
+        run: pnpm build
+
+      - name: Build web extension
+        working-directory: vencord
+        run: pnpm buildWeb
+
+      - name: Test
+        working-directory: vencord
+        run: node --test src/userplugins/rayward/tests/*.test.mjs

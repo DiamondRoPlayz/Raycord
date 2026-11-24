@@ -1,0 +1,66 @@
+name: A source result looks wrong
+description: The plugin shows something different from what a source reports.
+title: "source data: "
+labels: [source data, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This plugin displays what Rayward's sources return. It can't add, change or remove a flag.
+
+        **To dispute a flag**, use the Appeal link on that source's card in the full report, or contact the source directly. Issues asking to remove a flag will be closed.
+
+        Use this form only when the plugin shows something different from what the source itself reports, for example a wrong status, missing reasons, or a result attached to the wrong account.
+
+        Don't post other people's Discord or Roblox IDs here. Describe the account instead, and a maintainer will ask for details privately if they're needed.
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source
+      options:
+        - Rotector
+        - TASE
+        - RAB
+        - Okappiki
+        - ServerSweep
+        - RCR
+        - RoLock
+        - EASI
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: plugin-shows
+    attributes:
+      label: What the plugin shows
+      description: Status, reasons, and where you saw it (profile section, full report, indicator, /rayward).
+    validations:
+      required: true
+
+  - type: textarea
+    id: source-shows
+    attributes:
+      label: What the source shows
+      description: The same account as shown on the source's own site or bot.
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: v1.0.0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I'm not asking for a flag to be removed. I understand appeals go to the source.
+          required: true
+        - label: I pressed Refresh in the full report and the difference is still there.
+          required: true

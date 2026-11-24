@@ -1,0 +1,58 @@
+name: Vencord compatibility
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compat
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build against Vencord main
+    uses: ./.github/workflows/ci.yml
+    with:
+      vencord-ref: main
+
+  report:
+    name: Report result
+    needs: build
+    if: always() && github.repository == 'theseven1/Rayward-Vencord-User-Plugin'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open, update or close the tracking issue
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          RESULT: ${{ needs.build.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const label = "vencord-compat";
+            const { owner, repo } = context.repo;
+            const { data: open } = await github.rest.issues.listForRepo({ owner, repo, labels: label, state: "open", per_page: 1 });
+            const issue = open[0];
+            const { RESULT, RUN_URL } = process.env;
+
+            if (RESULT === "success") {
+              if (issue) {
+                await github.rest.issues.createComment({ owner, repo, issue_number: issue.number, body: `Builds against Vencord main again: ${RUN_URL}` });
+                await github.rest.issues.update({ owner, repo, issue_number: issue.number, state: "closed", state_reason: "completed" });
+              }
+              return;
+            }
+            if (RESULT !== "failure") return;
+
+            const body = `The nightly build against Vencord main failed: ${RUN_URL}\n\nThis usually means Vencord changed an API or Discord changed something a patch depends on.`;
+            if (issue) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: issue.number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title: "Build fails against Vencord main", body, labels: [label, "bug"] });
+            }

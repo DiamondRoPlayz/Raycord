@@ -1,0 +1,63 @@
+name: Release assets
+
+on:
+  release:
+    types: [published]
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to package
+        type: string
+        required: true
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to package
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Package plugin
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      TAG: ${{ inputs.tag || github.event.release.tag_name }}
+    steps:
+      - name: Check out release
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.TAG }}
+          path: source
+          persist-credentials: false
+
+      - name: Build archive
+        run: |
+          mkdir -p dist/rayward
+          rsync -a \
+            --exclude .git --exclude .github --exclude docs --exclude tests \
+            --exclude '*.md' --exclude '.*' \
+            --exclude release-please-config.json \
+            source/ dist/rayward/
+          cp source/README.md source/LICENSE dist/rayward/
+          cd dist
+          zip -qr "rayward-${TAG}.zip" rayward
+          sha256sum "rayward-${TAG}.zip" > "rayward-${TAG}.zip.sha256"
+          cat "rayward-${TAG}.zip.sha256"
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: dist/rayward-${{ env.TAG }}.zip
+
+      - name: Upload to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" dist/rayward-"$TAG".zip dist/rayward-"$TAG".zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"
