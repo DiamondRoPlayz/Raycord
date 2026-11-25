@@ -179,6 +179,12 @@
     cursor: default;
 }
 
+.vc-rw-chip-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .vc-rw-chip-safe {
     padding-left: 8px;
     color: var(--vc-rw-muted);
@@ -198,8 +204,8 @@
 
 .vc-rw-section {
     container-type: inline-size;
-    margin: 0 12px 12px;
-    padding: 4px 10px 8px;
+    margin: 0 0 12px;
+    padding: 2px 6px 6px;
     border: 1px solid var(--vc-rw-border);
     border-radius: 10px;
     background: var(--vc-rw-surface);
@@ -225,6 +231,9 @@
     color: var(--vc-rw-strong);
     font-size: 13px;
     font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .vc-rw-section-body {
@@ -233,7 +242,7 @@
 
 .vc-rw-view-all {
     width: 100%;
-    margin-top: 8px;
+    margin-top: 6px;
     padding: 6px;
     border: 0;
     border-radius: 6px;
@@ -293,11 +302,11 @@
 
 .vc-rw-scroll {
     max-height: 400px;
-    margin-right: -6px;
-    padding-right: 6px;
+    margin-right: -4px;
+    padding-right: 4px;
     overflow: hidden auto;
     scrollbar-color: var(--vc-rw-border) transparent;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: auto;
     scrollbar-width: thin;
 }
 
@@ -400,7 +409,7 @@
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     align-items: center;
-    min-height: 40px;
+    min-height: 20px;
     padding: 6px 10px;
     border: 0;
     border-radius: 8px;
@@ -1077,6 +1086,30 @@
 
     .vc-rw-card-body {
         padding: 8px 10px 10px;
+    }
+}
+
+/* Narrow profile sidebar / popout */
+@container (max-width: 300px) {
+    .vc-rw-section-head .vc-rw-chip-detail,
+    .vc-rw-card-head .vc-rw-chip-detail {
+        display: none;
+    }
+
+    .vc-rw-tab {
+        gap: 3px;
+        padding: 5px 2px;
+        font-size: 11px;
+    }
+
+    .vc-rw-tab-badge {
+        min-width: 14px;
+        padding: 0 3px;
+        line-height: 14px;
+    }
+
+    .vc-rw-list {
+        column-gap: 6px;
     }
 }
 
