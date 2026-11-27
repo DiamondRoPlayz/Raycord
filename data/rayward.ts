@@ -21,6 +21,7 @@ export const hasApiKey = () => !!settings.store.raywardApiKey?.trim();
 function authHeaders(): Record<string, string> {
     const key = settings.store.raywardApiKey?.trim();
     if (!key) throw makeError("config", "Add a Rayward API key in the plugin settings");
+    if (!key.startsWith('rwd_')) throw makeError("config", "Entered key isn't a valid Rayward API key.");
     return { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 }
 
