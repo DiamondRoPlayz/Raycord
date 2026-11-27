@@ -10,6 +10,7 @@ export const LEGACY_PLUGIN_NAME = "CatchThem";
 export const RAYWARD_API = "https://roscoe.rayward.app/v2";
 export const EASI_API = "https://catchthem.mk-7.org/api/easi";
 export const RAYWARD_SITE = "https://rayward.app";
+export const RAYWARD_ACCESS_API = "https://roscoe.rayward.app/v1/access/me";
 
 export const MIN_CACHE_TTL_MS = 5 * 60_000;
 export const MAX_CACHE_TTL_MS = 7 * 24 * 60 * 60_000;
